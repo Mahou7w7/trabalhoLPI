@@ -1,0 +1,196 @@
+.containerJogo{
+    display: flex;
+    width:100vw;
+    justify-content: space-between;
+    min-height:800px;
+    overflow: auto;
+    height: 100%;
+}
+#thegame{
+   
+  
+    border: solid black 1px;
+    width: 902px;
+    height:600px;
+    background-image: url("img/floresta.jpg");
+    background-size: cover;
+    display: flex;
+
+}   
+
+body{
+    min-height: 800px;
+}
+#Q{
+    display: none;
+}
+#W{
+    display: none;
+}
+#E{
+    display: none;
+}
+#R{
+    display: none;
+}
+#pugnaButton{
+   height: 20px;
+   width: 20px;
+   margin-right: 10px;
+   display: none;
+   position: absolute;
+   left: 485px;
+   top: 300px;
+}
+#netherwardButton{
+    height: 20px;
+    width: 20px;
+    display: none;
+    position: absolute;
+    left: 163px;
+    top: 315px;
+}
+#netherWard{
+    display: none;
+    width: 150px;
+    height: 150px;
+    left: 100px;
+    top: 250px;
+    position: absolute;
+}
+
+#sla{
+    
+    height: 100%;
+    flex-direction: column;
+    display: none;
+    justify-content: space-around;
+    min-height: 800px;
+}
+#telaJogo{
+    width: 47vw;
+    height:50vh;
+  position: relative;
+ 
+}
+#inimigo{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 420px;
+    top: 200px;
+    
+}
+
+#HUD{
+    padding-top: 10px;
+    height: 15vh;
+    width: 47vw;
+    background-color: white;
+    position: relative;
+    border: solid red 1px;
+    text-align: center;
+   
+    
+}
+
+#batalha{
+    display:none;
+
+}
+#fala{
+    position: absolute;
+    
+    bottom: 58px;
+    left: 15px;
+}
+#info{
+   
+    overflow:auto;
+    text-align: center;
+    width: 24vw;
+    height : 100vh;
+    text-align: center;
+    border: solid black 1px;
+ 
+   
+}
+
+#info:a{
+    width:20%;
+    
+}
+.CharactersButton:hover{
+    height:19vh;
+    width: 19vw;
+}
+
+
+#persos{
+    
+    overflow: auto;
+    width: 24vw;
+height : 100vh;
+border: solid black 1px;
+
+}
+.CharactersButton{
+    width: 20vw;
+    height: 20vh;
+}
+
+
+
+
+.barra{
+
+    border: solid black 1px;
+   height: 3%;
+   width: 50%;
+   border-radius: 5px;
+   margin-bottom: 5px;
+ 
+
+ 
+}
+#VidaInimigo{
+    border: solid black 1px;
+    background-color: red;
+    height: 6%;
+    width: 20%;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    left: 430px;
+    top: 190px;
+    position: absolute;
+    display: block;
+    
+}
+#thebars{
+    display: none;
+    flex-direction: column;
+
+     align-items: center;
+   
+}
+
+
+
+#Vicone{
+    
+   
+    width:8%;
+    height:auto;
+    
+    
+}
+#Micone{
+    width:8%;
+    height:auto;
+}
+#atPicone{
+    width:8%;
+    height:auto;
+   
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jogo.css">
+    <title>Document</title>
+    <script src="jogo.js"> </script>
+
+</head>
+<body>
+    <!--container que ocupa todo o site-->
+  <div class="containerJogo">
+    <!--barra de seleção de personagens na esquerda-->
+    <div id="persos">
+    <a onclick="ingame(Abaddon)" onmouseover="MostrarPersonagem(Abaddon)"><img src="img/Abaddon_icon.webp" class="CharactersButton"  id="pAbaddon"></a>
+  <br>
+    <a onclick="ingame(Rubick)"  onmouseover="MostrarPersonagem(Rubick)" ><img src="img/Rubick_icon.webp" class="CharactersButton"  id="pRubick"></a>
+ <br>
+    <a onclick="ingame(Bane)" onmouseover="MostrarPersonagem(Bane)"><img src="img/Bane_icon.webp" class="CharactersButton"  id="pBane"></a>
+    <br>
+    <a onclick="ingame(BountyHunter)" onmouseover="MostrarPersonagem(BountyHunter)"><img src="img/Bounty_Hunter_Large.png" class="CharactersButton"  id="pBane"></a>
+    </div>
+    <!--div do jogo por completo-->
+    <div id="sla">
+    <div id="thegame">
+        <!--seção onde realmente é o jogo-->
+        <section id="telaJogo" style="display: none;">
+            <div id="VidaInimigo">
+                <a id="PugnaVida"></a>
+            </div>
+           
+            <img id="netherWard" src="img/Nether_Ward_icon.webp">
+          
+            <button id="netherwardButton" onclick="chooseAttack(netherWard)"></button>
+            <img src="img/pugna.png" id="inimigo">
+            <button id="pugnaButton" onclick="chooseAttack(Pugna)"></button>
+           
+         
+            <!--hud do jogo-->
+            
+        </section>
+    
+</div>
+    <div id="HUD">
+        <div id="batalha">
+            <span>
+                <button id="atacar" onclick="Attack()" class="acao">Atacar</button>
+                <button id="item" class="acao">Item</button>
+                <button id="Q" class="hab" onclick="SkillQ(Pugna)">Q</button>
+                <button id="W">W</button>
+            </span>
+            <br>
+            <span>
+                <button id="skill" onclick="Skill()" class="acao">Skill</button>
+                <button id="defender" class="acao">Block</button>
+                
+                <button id="E" class="hab">E</button>
+                <button id="R" class="hab">R</button>
+            </span>
+            <p id="log"></p>
+        </div>       
+         <div id="dialogo">
+        
+        <p id="fala"  onclick="PugnaFala()">Você vê algo na distância...</p>
+         </div>
+    </div>
+</div>
+<!--Barra de informações (Direita)-->
+<div id="info">
+    <img id="foto" style="height: 80%; width: 100%;">
+  
+      
+     
+            <div id="thebars">
+            <div class="barra">
+    <img id="Vicone" src='img/health-8.png' >
+        
+     <a id="vida"></a>
+  
+    </div>
+    <div class="barra">
+        <a id="dano"></a>
+    </div>
+       
+        
+
+    
+    <div class="barra">
+        <img id="Micone" src='img/joy.png'>
+    <a id="mana"></a>
+    </div>
+    <div class="barra">
+        <img id="atPicone" src='img/battery.png'>
+    <a id="atP"></a>
+    </div>
+    </div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>
