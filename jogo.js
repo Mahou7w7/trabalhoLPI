@@ -6,6 +6,12 @@ let drenoMaximo = 100;
  let drenando = 0;
  let conta = 1;
  let duracao = 0;
+ let SkillPugna= 1;
+ let  temNetherWard=0;
+ let  shield=0;
+ let usouSkill=0;
+ let HPregenerado = 0;
+ let turnoPugna=0;
 const Personagem= function(){
 
     this.id=12;
@@ -112,13 +118,14 @@ function ingame(personagem){
     document.getElementById("sla").style="display:flex;"
     document.getElementById("telaJogo").style="display:flex;"
     PersonagemSelecionado = personagem;
+     limiteHP = Math.ceil((10*PersonagemSelecionado.vidaTotal)/100);
 }
 
-let netherWard = new Inimigo()
-    netherWard.Inome = "Nether Ward";
-    netherWard.Ivida= 150;
-    netherWard.IdanoTotal=50+(PersonagemSelecionado.mana*1.2);
-    netherWard.Idano = 50+(PersonagemSelecionado.mana*1.2);
+let NetherWard = new Inimigo()
+    NetherWard.Inome = "Nether Ward";
+    NetherWard.Ivida= 150;
+    NetherWard.IdanoTotal=50+(PersonagemSelecionado.mana*1.2);
+    NetherWard.Idano = 50+(PersonagemSelecionado.mana*1.2);
 
    
 
@@ -136,43 +143,73 @@ document.getElementById("dano").innerHTML= personagem.dano;
     }
 }
 function Skill(){
-    document.getElementById('Q').style="display:block";
-    document.getElementById('W').style="display:block";
-    document.getElementById('E').style="display:block";
-    document.getElementById('R').style="display:block";
+    if(turnoPugna==0){
+    document.getElementById('Q').style="display:inline-block";
+    document.getElementById('W').style="display:inline-block";
+    document.getElementById('E').style="display:inline-block";
+    document.getElementById('R').style="display:inline-block";
     document.getElementById('atacar').style="display:none";
     document.getElementById('skill').style="display:none";
     document.getElementById('item').style="display:none";
     document.getElementById('defender').style="display:none";
     }
+    }
 
-function SkillQ(inimigo){
+function SkillQ(inimigoSk){
+    if(inimigos>1 && usouSkill==0){
+        usouSkill=1;
+        document.getElementById('pugnaButton').style='display:block';
+        document.getElementById('netherwardButton').style='display:block';
+    }else{
     if(PersonagemSelecionado.id==1){
-        PersonagemSelecionado.vida=PersonagemSelecionado.vida-(35*PersonagemSelecionado.vidaTotal)/100;
+        PersonagemSelecionado.vida=Math.ceil(PersonagemSelecionado.vida-(35*PersonagemSelecionado.vidaTotal)/100);
         document.getElementById("vida").innerHTML= PersonagemSelecionado.vida;
-        inimigo.Ivida=inimigo.Ivida-100;
-        if(inimigo==Pugna){
+        inimigoSk.Ivida=inimigoSk.Ivida-100;
+        if(inimigoSk==Pugna){
             document.getElementById("PugnaVida").innerHTML= Pugna.Ivida;
         }
     }else if(PersonagemSelecionado.id==2){     
-        if(inimigo!=netherWard){
+        if(inimigoSk!=NetherWard){
        duracao=12;
-       inimigo.Idano=inimigo.Idano-(55*inimigo.Idano)/100;
+       inimigoSk.Idano=inimigoSk.Idano-(55*inimigoSk.Idano)/100;
       
         let johnson=  setInterval(function(){
-            inimigo.Ivida=inimigo.Ivida-12;
+            inimigoSk.Ivida=inimigoSk.Ivida-12;
             duracao--
 
-                                    if(inimigo==Pugna){
-            document.getElementById("PugnaVida").innerHTML= inimigo.Ivida;
+                                    if(inimigoSk==Pugna){
+            document.getElementById("PugnaVida").innerHTML= inimigoSk.Ivida;
                                     }
             if(duracao<=0){
                 clearInterval(johnson);
-                inimigo.Idano=inimigo.IdanoTotal;
+                inimigoSk.Idano=inimigoSk.IdanoTotal;
             }
         }, 1000);
+    }else{
+        document.getElementById("log").innerHTML='Você tentou usar Debilitar mas falhou!';
     }
+    }else if(PersonagemSelecionado.id==3){
+        SkillPugna=0;
+    }else if(PersonagemSelecionado.id==4){
+        inimigoSk.Ivida=inimigoSk.Ivida-100;
     }
+    usouSkill=0;
+EstadoEspera();
+    }
+}
+function SkillW(inimigo){
+    if(inimigos>1 && usouSkill==0 && PersonagemSelecionado.id!=1){
+        usouSkill=2;
+        document.getElementById('pugnaButton').style='display:block';
+        document.getElementById('netherwardButton').style='display:block';
+    }else{
+    if(PersonagemSelecionado.id==1){
+        shield=1;
+    }
+
+    EstadoEspera();
+    PugnaAttack();
+}
 }
 
 
@@ -196,28 +233,53 @@ function PugnaFala(){
     }
 }
 function chooseAttack(inimigo){
+    if(turnoPugna==0){
+   switch(usouSkill){
+    case 1:
+        document.getElementById('pugnaButton').style='display:none';
+        document.getElementById('netherwardButton').style='display:none';
+        SkillQ(inimigo);
+    break;
+    case 2:
+        document.getElementById('pugnaButton').style='display:none';
+        document.getElementById('netherwardButton').style='display:none';
+        SkillW(inimigo);
+        break;
+        default:
     if(inimigo.Ivida>0 && PersonagemSelecionado.dano>0){
+        if(inimigo==Pugna){
         inimigo.Ivida= inimigo.Ivida-PersonagemSelecionado.dano;
+        }else{
+            inimigo.Ivida= inimigo.Ivida-(PersonagemSelecionado.dano*2);
+        }
+       
         }else if(PersonagemSelecionado.dano==0){
             PersonagemSelecionado.dano=PersonagemSelecionado.atbPrincipal*2;
             document.getElementById("dano").innerHTML= PersonagemSelecionado.dano;
         }
         if(inimigo.Ivida>0 && inimigo==Pugna){
         document.getElementById("PugnaVida").innerHTML= inimigo.Ivida;
-        }else{
-            if(inimigo==Pugna){
+        }else if(inimigo.Ivida<=0 && inimigo==Pugna){
             document.getElementById('inimigo').style='display:none';
             document.getElementById('VidaInimigo').style='display:none';
-            }else if(inimigo==netherWard){
-                document.getElementById('netherWard').style='display:none';
-                inimigos=1;
+       
+          
             }
+            if(inimigo==NetherWard && inimigo.Ivida<0){
+                document.getElementById('netherWard').style='display:none';
+                temNetherWard=0;
+                inimigos=1;
         }
         PugnaAttack()
         document.getElementById('pugnaButton').style='display:none';
         document.getElementById('netherwardButton').style='display:none';
+
+        break;
+}
+    }
 }
 function Attack(){
+    if(turnoPugna==0){
     if(drenando==0){
     if(inimigos>1){
  document.getElementById('pugnaButton').style='display:block';
@@ -240,9 +302,32 @@ function Attack(){
 }
     }
 }
-
+}
+function RegeneraHP(){
+    let vidaRecuperada = setInterval(function(){
+            
+        PersonagemSelecionado.vida+=Math.ceil(PersonagemSelecionado.ganhoVida);
+        HPregenerado+=Math.ceil(PersonagemSelecionado.ganhoVida);
+        if(PersonagemSelecionado.vida>PersonagemSelecionado.vidaTotal){
+            PersonagemSelecionado.vida=PersonagemSelecionado.vidaTotal
+            document.getElementById("vida").innerHTML= PersonagemSelecionado.vida;
+        }else{
+        document.getElementById("vida").innerHTML= PersonagemSelecionado.vida;
+        }
+        if(PersonagemSelecionado.vida>=PersonagemSelecionado.vidaTotal || HPregenerado>=limiteHP){
+            clearInterval(vidaRecuperada); document.getElementById("vida").innerHTML= PersonagemSelecionado.vida;
+  
+            HPregenerado=0;
+            
+        }
+    }, 1000);
+}
 function PugnaAttack(){
-    
+    turnoPugna=1;
+    if(PersonagemSelecionado.vida!=PersonagemSelecionado.vidaTotal){
+     RegeneraHP();
+    }
+    if(SkillPugna==1){
     let delay = setInterval(function(){
      
         if(conta==1){
@@ -253,42 +338,57 @@ function PugnaAttack(){
             document.getElementById("log").innerHTML= '...'
         }
         if(conta==4){
-            let ataquePugna = Math.floor(Math.random() * 11);
+            let ataquePugna = Math.floor(Math.random() * 9);
     switch(ataquePugna){
        
-        case 1:
-            case 2:
-                case 3:
-                    case 4:
+        case 0:
+            case 1:
+                case 2:
+                    case 3:
+                        if(shield==0){
             if(PersonagemSelecionado.vida>0){
                 PersonagemSelecionado.vida= PersonagemSelecionado.vida-Pugna.Idano;
                 document.getElementById("vida").innerHTML= PersonagemSelecionado.vida;
                 document.getElementById("log").innerHTML= 'Pugna usou ataque!'
+                inicioTurno();
+                }}else{
+                    shield=0;
+                    document.getElementById("log").innerHTML= 'Pugna usou atacar mas falhou!'
+                    inicioTurno();
                 }
                 break;
-                case 5:
-                    case 6:
-                        case 7:
+                case 4:
+                    case 5:
+                    
                     if(PersonagemSelecionado.dano>0){
                     PersonagemSelecionado.dano=0;
                     document.getElementById("dano").innerHTML= PersonagemSelecionado.dano;
                     document.getElementById("log").innerHTML= 'Pugna usou decrepitar!'
+                    inicioTurno();
                     break;
                 
                     }else{
-                        ataquePugna = Math.floor(Math.random() * 4);
+                        conta=1;
+                        PugnaAttack();
+
                         
                     }
                     
-                    case 8:
-                        case 9:
-                        if(inimigos==1){
+                    case 6:
+                        case 7:
+                        if(inimigos==1 && temNetherWard==0){
                       inimigos=2;
+                      temNetherWard=1;
                       document.getElementById('netherWard').style='display:block';
                       document.getElementById("log").innerHTML= 'Pugna usou Sentinela Antimagia!'
+                      inicioTurno();
+                        }else{
+                            conta=1;
+                            PugnaAttack();
                         }
                       break;
-                      case 10:
+                      case 8:
+                        if(shield==0){
                         drenagem=0;
                         document.getElementById("log").innerHTML= 'Pugna usou Dreno de vida!'
                         drenando=1;
@@ -302,14 +402,20 @@ function PugnaAttack(){
                                 drenando=0;
                                 clearInterval(atumalaca);
                             }
-                        }, 100);
+                        }, 100);}else{
+                            shield=0;
+                            document.getElementById("log").innerHTML= 'Pugna usou dreno de vida mas falhou!'
+                        }
+                        if(drenando==0){
+                        inicioTurno();
+                        }
 break;
 
     
     
     }
         }
-        conta++
+        conta++;
         if(conta>4){
             clearInterval(delay);
         }
@@ -317,8 +423,22 @@ break;
     if(conta>4){   
     conta=1;
 }
+    }else{
+        SkillPugna=1;
+    }
+   
 }
-
+function EstadoEspera(){
+ 
+    document.getElementById('Q').style='display:none';
+    document.getElementById('W').style='display:none';
+    document.getElementById('E').style='display:none';
+    document.getElementById('R').style='display:none';
+    document.getElementById('atacar').style="display:inline-block";
+    document.getElementById('skill').style="display:inline-block";
+    document.getElementById('item').style="display:inline-block";
+    document.getElementById('defender').style="display:inline-block";
+}
 function BatalhaInicio(){
     document.getElementById('Q').innerHTML=PersonagemSelecionado.qNome;
     document.getElementById('W').innerHTML=PersonagemSelecionado.wNome;
@@ -327,8 +447,14 @@ function BatalhaInicio(){
     document.getElementById('dialogo').style='display:none';
     document.getElementById('batalha').style='display:block';
 
+
     if(Pugna.Ivida>0 && inimigos==0){
         inimigos=1;
     }
 }
-
+function inicioTurno(){
+    turnoPugna=0;
+    if(PersonagemSelecionado.vida!=PersonagemSelecionado.vidaTotal){
+        RegeneraHP();
+       }
+}
