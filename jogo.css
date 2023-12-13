@@ -17,9 +17,67 @@
     display: flex;
 
 }   
-
+#loja{
+    display: none;
+}
+#dazzle{
+    position: absolute;
+    left: 1000px;
+    top: 300px;
+    width: 90px;
+    height: 180px;
+  opacity: 0;
+}
+#tarrasque{
+    border: solid black 1px;
+    
+}
+#GameOver{
+    display: none;
+    background-color: black;
+    text-align: center;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+}
+#midas{
+    border: solid black 1px;
+}
+#aegis{
+    border: solid black 1px;
+}
+#rapieira{
+    border: solid black 1px;
+}
+#h4{
+    font-size: small;
+    height: 11px;
+    border: solide red 1px;
+}
+#lojista{
+    position: absolute;
+    top: 250px;
+    left: 1180px;
+    width: 130px;
+    height: 190px;
+    opacity: 0;
+}
+#HudLoja{
+    border: solid red 3px;
+    display:none;
+    width:500px;
+    height:480px;
+    left:710px;
+    top:35px;
+    position:absolute;
+    background-color: white;
+}
+#terminar{
+    float: right;
+}
 body{
     min-height: 800px;
+    background-color: #19191a;
 }
 #Q{
     display: none;
@@ -82,14 +140,26 @@ body{
     
 }
 
+#timer{
+    color: red;
+    position: absolute;
+    left: 950px;
+    font-size: large;
+}
+
+
+
 #HUD{
     padding-top: 10px;
     height: 15vh;
     width: 47vw;
-    background-color: white;
+    background-color: #52030a;
+    color: white;
     position: relative;
-    border: solid red 1px;
+    border: solid black 3px;
+    border-radius: 10px;
     text-align: center;
+    font-family:'Times New Roman', Times, serif
    
     
 }
@@ -104,6 +174,7 @@ body{
     bottom: 58px;
     left: 15px;
 }
+
 #info{
    
     overflow:auto;
@@ -112,7 +183,7 @@ body{
     height : 100vh;
     text-align: center;
     border: solid black 1px;
- 
+    background-color: #292a2b;
    
 }
 
@@ -132,6 +203,7 @@ body{
     width: 24vw;
 height : 100vh;
 border: solid black 1px;
+background-color: #292a2b;
 
 }
 .CharactersButton{
@@ -149,9 +221,15 @@ border: solid black 1px;
    width: 50%;
    border-radius: 5px;
    margin-bottom: 5px;
- 
+   background-color: white;
 
  
+}
+#dano{
+    color: white;
+}
+#money{
+    color: white;
 }
 #VidaInimigo{
     border: solid black 1px;

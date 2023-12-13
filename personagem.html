@@ -11,8 +11,11 @@
 
 </head>
 <body>
+    <div id="GameOver">
+        <h1>Game Over</h1>
+    </div>
     <!--container que ocupa todo o site-->
-  <div class="containerJogo">
+  <div class="containerJogo" id="entire">
     <!--barra de seleção de personagens na esquerda-->
     <div id="persos">
     <a onclick="ingame(Abaddon)" onmouseover="MostrarPersonagem(Abaddon)"><img src="img/Abaddon_icon.webp" class="CharactersButton"  id="pAbaddon"></a>
@@ -42,7 +45,38 @@
             <!--hud do jogo-->
             
         </section>
-    
+    <div id="minigame1">
+      
+        <p id="timer"></p>
+    </div>
+    <div id="loja">
+        <div id="HudLoja">
+            <div id="tarrasque">
+                <h4 onclick="CompraTarrasque()">Coração de Tarrasque</h4>
+                <h5>500$</h5>
+                <p>Aumenta sua vida em 100</p>
+                
+            </div>
+            <div id="midas">
+                <h4 onclick="CompraMidas()">Mão de Midas</h4>
+                <h5>1300</h5>
+                <p>Aumenta ouro ganho</p>
+            </div>
+            <div id="rapieira">
+                <h4 onclick="CompraRapieira()">Rapieira Divina</h4>
+                <h5>1000$</h5>
+                <p>Aumenta seu dano em 60</p>
+            </div>
+            <div id="aegis">
+                <h4 onclick="CompraAegis()">Aegis do Imortal</h4>
+                <h5>3000$</h5>
+                <p>Use para entrar no Labirinto de Razor</p>
+            </div>
+            <button id="terminar" onclick="BattleBegins()">Terminar</button>
+        </div>
+        <button id="dazzle" onclick="DazzleFala()"></button>
+        <button id="lojista" onclick="KeeperFala()"></button>
+    </div>
 </div>
     <div id="HUD">
         <div id="batalha">
@@ -55,16 +89,16 @@
             <br>
             <span>
                 <button id="skill" onclick="Skill()" class="acao">Skill</button>
-                <button id="defender" class="acao">Block</button>
                 
-                <button id="E" class="hab">E</button>
-                <button id="R" class="hab">R</button>
+                
+                <button id="E" onclick="SkillE(Pugna)" class="hab">E</button>
+            
             </span>
             <p id="log"></p>
         </div>       
          <div id="dialogo">
         
-        <p id="fala"  onclick="PugnaFala()">Você vê algo na distância...</p>
+        <p id="fala">Você vê algo na distância...</p>
          </div>
     </div>
 </div>
@@ -81,9 +115,7 @@
      <a id="vida"></a>
   
     </div>
-    <div class="barra">
-        <a id="dano"></a>
-    </div>
+   
        
         
 
@@ -96,6 +128,8 @@
         <img id="atPicone" src='img/battery.png'>
     <a id="atP"></a>
     </div>
+    <a id="dano"></a>
+    <a id="money"></a>
     </div>
 
 </div>
